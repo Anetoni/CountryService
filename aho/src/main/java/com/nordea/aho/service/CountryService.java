@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.nordea.aho.model.Country;
 
+/*
+ * Contains the logic behind the REST API
+ */
+
 @Service
 public class CountryService {
     
