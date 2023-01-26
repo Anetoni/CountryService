@@ -1,10 +1,12 @@
-package com.nordea.aho;
+package com.nordea.aho.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /*
  * This class is used to handle information fetched from external sources
  */
 
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Country {
     
     private String country;    
@@ -35,19 +37,19 @@ public class Country {
 
    
 
-    public String getcountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setcountry(String country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
-    public String getcode() {
+    public String getCode() {
         return code;
     }
 
-    public void setcode(String code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
