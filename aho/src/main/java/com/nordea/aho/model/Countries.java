@@ -10,13 +10,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Countries {
-    private List<Country> countries = null;
+    private List<Data> countries = null;
 
-    public List<Country> getData() {
+    public List<Data> getData() {
         return countries;
     }
 
-    public void setData(List<Country> countries) {
+    public void setData(List<Data> countries) {
         this.countries = countries;
     }
 }
