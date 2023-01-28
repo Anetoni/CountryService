@@ -1,16 +1,16 @@
 package com.nordea.aho.controller;
 
-import com.nordea.aho.model.Country;
-import com.nordea.aho.service.CountryService;
 
-import java.util.ArrayList;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.nordea.aho.model.Countries;
+import com.nordea.aho.model.Data;
+import com.nordea.aho.service.CountryService;
+import java.io.IOException;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.resource.HttpResource;
+
 
 /*
  * Responsible for processing REST API requests
@@ -21,14 +21,17 @@ public class CountryController {
 
     private CountryService countryService;
 
-    @Autowired
     public CountryController(CountryService countryService) {
         this.countryService = countryService;
     }
 
     @GetMapping("/countries")
-    public Country getCountry(@RequestParam("name") String name) {
-        return countryService.getCountry(name);
+    public Countries getCountries() throws IOException {
+        return countryService.getCountries();
     }
 
+    @GetMapping("/countries/{name}")
+    public Data getCountry(@PathVariable("name")String name) throws StreamReadException, DatabindException, IOException {
+        return countryService.getCountry(name);
+    }
 }
