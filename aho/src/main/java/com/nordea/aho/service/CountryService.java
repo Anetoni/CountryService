@@ -1,13 +1,16 @@
 package com.nordea.aho.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.nordea.aho.model.Country;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nordea.aho.model.Countries;
+import com.nordea.aho.model.Data;
 
 /*
  * Contains the logic behind the REST API
@@ -15,18 +18,23 @@ import com.nordea.aho.model.Country;
 
 @Service
 public class CountryService {
-    
-    private ArrayList<Country> countries;
 
-    public CountryService() {
-        countries = new ArrayList<Country>();
-
-    
+    public Countries getCountries() throws IOException {
+        URL url = new URL("https://countriesnow.space/api/v0.1/countries/iso");
+        ObjectMapper mapper = new ObjectMapper();
+        Countries countries = mapper.readValue(url, Countries.class);
+        
+        return countries;
     }
 
-    public Country getCountry(String name) {
-        for (Country country : countries) {
-            if(name.equals(country.getCountry())) {
+    public Data getCountry(String name) throws StreamReadException, DatabindException, IOException {
+        URL url = new URL("https://countriesnow.space/api/v0.1/countries/info?returns=currency,flag,unicodeFlag,dialCode");
+        ObjectMapper mapper = new ObjectMapper();
+        
+        Countries countries = mapper.readValue(url, Countries.class);
+        List<Data> countryList = countries.getData();
+        for(Data country : countryList) {
+            if(name.equals(country.getName())) {
                 return country;
             }
         }
