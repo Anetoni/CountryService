@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 /*
- * Responsible for processing REST API requests
+ * Responsible for processing HTTP Requests
+ * Retrieves information through CountryService.
  */
 
 @RestController
@@ -24,12 +25,14 @@ public class CountryController {
     public CountryController(CountryService countryService) {
         this.countryService = countryService;
     }
-
+    
+    //Retrieves information of all countries through CountryService.
     @GetMapping("/countries")
     public Countries getCountries() throws IOException {
         return countryService.getCountries();
     }
 
+    //Retrieves information of specified country through CountryService.
     @GetMapping("/countries/{name}")
     public Data getCountry(@PathVariable("name")String name) throws StreamReadException, DatabindException, IOException {
         return countryService.getCountry(name);
