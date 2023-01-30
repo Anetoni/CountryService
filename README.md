@@ -41,3 +41,8 @@ would produce this:
 ![finland](postmanfinland.png)
 
 ## Comments about the project
+In this project I didn't manage to include required information such as country code, capital or population to the information regarding a specific country. This was due to https://countriesnow.space/api/v0.1/countries/info?returns= not including the specified information correctly. Instead I decided to showcase the information it provided, such as flag url, currency, dialcode and the flag unicode. 
+
+This project was a great learning opportunity about Spring Boot and its capabilities. The testing of the program is quite basic and lacks automation due to my personal time constraints and lack of knowledge.
+
+Thank you for your time!
